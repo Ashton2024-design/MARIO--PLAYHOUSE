@@ -1,0 +1,381 @@
+<html><head><base href="." />
+<meta charset="UTF-8">
+<title>Mario Playhouse</title>
+<style>
+  /* Mario-themed color palette */
+  :root {
+    --mario-red: #e52521;
+    --mario-blue: #4a90e2;
+    --mario-yellow: #fbd000;
+    --mario-green: #43b047;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--mario-blue);
+    color: white;
+  }
+
+  .header {
+    background-color: var(--mario-red);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .mario-logo {
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+  }
+
+  .mario-logo text {
+    font-size: 3.5vw;
+  }
+
+  .nav {
+    background-color: var(--mario-yellow);
+    padding: 15px;
+    text-align: center;
+  }
+
+  .nav a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+
+  .nav a:hover {
+    color: var(--mario-red);
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #333;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr;  /* Changed from repeat(auto-fit, minmax(300px, 1fr)) */
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px;  /* Add max-width to prevent video from stretching too wide */
+    margin: 0 auto;    /* Center the video container */
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .mario-coin {
+    animation: spin 2s infinite linear;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+  }
+
+  @keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+
+  .footer {
+    background-color: var(--mario-red);
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .game-container {
+    width: 100%;
+    height: 600px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #player {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+  }
+
+  .platform {
+    position: absolute;
+    background: var(--mario-yellow);
+    height: 20px;
+  }
+
+  #ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: var(--mario-green);
+  }
+
+  .mario-art {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .mario-art:hover {
+    transform: scale(1.05);
+  }
+
+  @media screen and (max-width: 768px) {
+    .mario-logo text {
+      font-size: 6vw;
+    }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<audio id="backgroundMusic" loop>
+  <source src="https://dm0qx8t0i9gc9.cloudfront.net/previews/audio/BsTwCwBHBjzwub4i4/super-mario-64-theme_NWM.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<div style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+  <button id="musicToggle" style="font-family: 'Press Start 2P', cursive; padding: 5px; cursor: pointer;">
+    🔇 Music Off
+  </button>
+</div>
+
+<div class="header">
+  <svg class="mario-logo" viewBox="0 0 400 100" preserveAspectRatio="xMidYMid meet">
+    <text x="50%" y="50%" fill="white" text-anchor="middle" dominant-baseline="middle" 
+          style="font-family: 'Press Start 2P', cursive;">
+      MARIO PLAYHOUSE
+    </text>
+  </svg>
+</div>
+
+<nav class="nav">
+  <a href="#games">Games</a>
+  <a href="#videos">Videos</a>
+  <a href="#photos">Photos</a>
+  <a href="https://mario.nintendo.com">Official Site</a>
+</nav>
+
+<div class="content">
+  <section id="games" class="section">
+    <h2>Play Mario</h2>
+    <div class="game-container">
+      <svg id="player" viewBox="0 0 50 50">
+        <rect x="10" y="10" width="30" height="30" fill="var(--mario-red)"/>
+        <circle cx="25" cy="20" r="10" fill="#FFE4B5"/>
+      </svg>
+      <div id="ground"></div>
+    </div>
+    <p>Use arrow keys or A/D to move, Space to jump!</p>
+  </section>
+
+  <section id="videos" class="section">
+    <h2>Featured Videos</h2>
+    <div class="video-grid">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/KydqdKKyGEk" 
+              title="Super Mario Bros. Wonder Direct" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section id="photos" class="section">
+    <h2>Mario Artwork Gallery</h2>
+    <div class="photo-grid">
+      <!-- 8-bit Simple Mario -->
+      <svg class="mario-art" viewBox="0 0 100 100" style="background: #87CEEB;">
+        <rect x="35" y="20" width="30" height="10" fill="var(--mario-red)"/>
+        <rect x="40" y="30" width="20" height="15" fill="#FFE4B5"/>
+        <rect x="43" y="33" width="4" height="4" fill="#000"/>
+        <rect x="42" y="38" width="16" height="3" fill="#000"/>
+        <rect x="35" y="45" width="30" height="20" fill="var(--mario-red)"/>
+        <rect x="40" y="50" width="20" height="15" fill="#4B0082"/>
+      </svg>
+
+      <!-- Mario Face Close-up -->
+      <svg class="mario-art" viewBox="0 0 100 100" style="background: var(--mario-red);">
+        <circle cx="50" cy="50" r="30" fill="#FFE4B5"/>
+        <circle cx="40" cy="45" r="5" fill="#000"/>
+        <circle cx="60" cy="45" r="5" fill="#000"/>
+        <path d="M35,65 Q50,75 65,65" fill="none" stroke="#000" stroke-width="3"/>
+        <rect x="25" y="20" width="50" height="15" fill="var(--mario-red)"/>
+        <rect x="35" y="15" width="30" height="10" fill="var(--mario-red)"/>
+      </svg>
+
+      <!-- Mario Running -->
+      <svg class="mario-art" viewBox="0 0 100 100" style="background: var(--mario-blue);">
+        <rect x="30" y="20" width="40" height="30" fill="var(--mario-red)" transform="rotate(-10,50,50)"/>
+        <circle cx="50" cy="20" r="15" fill="#FFE4B5"/>
+        <rect x="40" y="30" width="20" height="15" fill="#4B0082" transform="rotate(-10,50,50)"/>
+        <path d="M30,60 L40,70 L50,60" fill="none" stroke="#4B0082" stroke-width="5"/>
+        <path d="M60,60 L50,70 L40,60" fill="none" stroke="#4B0082" stroke-width="5"/>
+      </svg>
+
+      <!-- Mario Jump -->
+      <svg class="mario-art" viewBox="0 0 100 100" style="background: var(--mario-green);">
+        <rect x="30" y="20" width="40" height="30" fill="var(--mario-red)" transform="rotate(15,50,50)"/>
+        <circle cx="50" cy="20" r="15" fill="#FFE4B5"/>
+        <rect x="40" y="30" width="20" height="15" fill="#4B0082" transform="rotate(15,50,50)"/>
+        <path d="M40,60 C30,50 50,40 60,60" fill="none" stroke="#4B0082" stroke-width="5"/>
+        <path d="M35,45 Q50,35 65,45" fill="none" stroke="#000" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <svg class="mario-coin" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" fill="var(--mario-yellow)"/>
+    <text x="50" y="65" text-anchor="middle" fill="#B8860B" 
+          style="font-family: 'Press Start 2P', cursive; font-size: 40px;">
+      ★
+    </text>
+  </svg>
+  <p>© 2023 Mario Fan Site - Not affiliated with Nintendo</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const player = document.getElementById('player');
+    let playerX = 50;
+    let playerY = 50;
+    let velocityX = 0;
+    let velocityY = 0;
+    let isJumping = false;
+    const gravity = 0.5;
+    const jumpForce = -12;
+    const moveSpeed = 5;
+
+    // Game loop
+    function gameLoop() {
+        // Apply gravity
+        if (playerY < 550) {  // Ground level
+            velocityY += gravity;
+        }
+
+        // Update position
+        playerX += velocityX;
+        playerY += velocityY;
+
+        // Ground collision
+        if (playerY > 550) {
+            playerY = 550;
+            velocityY = 0;
+            isJumping = false;
+        }
+
+        // Wall collision
+        if (playerX < 0) playerX = 0;
+        if (playerX > window.innerWidth - 50) playerX = window.innerWidth - 50;
+
+        // Update player position
+        player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    // Key controls
+    document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+            case 'ArrowLeft':
+            case 'a':
+                velocityX = -moveSpeed;
+                break;
+            case 'ArrowRight':
+            case 'd':
+                velocityX = moveSpeed;
+                break;
+            case ' ':
+                if (!isJumping) {
+                    velocityY = jumpForce;
+                    isJumping = true;
+                }
+                break;
+        }
+    });
+
+    document.addEventListener('keyup', (e) => {
+        switch(e.key) {
+            case 'ArrowLeft':
+            case 'ArrowRight':
+            case 'a':
+            case 'd':
+                velocityX = 0;
+                break;
+        }
+    });
+
+    // Start game loop
+    gameLoop();
+
+    // Add smooth scrolling to nav links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Add hover animation to sections
+    document.querySelectorAll('.section').forEach(section => {
+        section.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.01)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        section.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+
+    // Add music control functionality
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isMusicPlaying = false;
+
+    musicToggle.addEventListener('click', () => {
+        if (isMusicPlaying) {
+            backgroundMusic.pause();
+            musicToggle.innerHTML = '🔇 Music Off';
+            isMusicPlaying = false;
+        } else {
+            backgroundMusic.play().catch(error => {
+                console.log("Audio playback failed:", error);
+            });
+            musicToggle.innerHTML = '🔊 Music On';
+            isMusicPlaying = true;
+        }
+    });
+});
+</script>
+
+</body>
+</html>
